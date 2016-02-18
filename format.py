@@ -2,7 +2,7 @@ import sys
 import requests
 import ssl
 
-file = "2016-02-15-scala__util_control_Breaks_TryBlock.md"
+file = "_pre/2016-02-15-scala__util_control_Breaks_TryBlock.md"
 
 def run(file):
   contents = ""
@@ -32,17 +32,18 @@ def run(file):
 
   template = """---
 layout: post
-title:  "$title"
+title:  "Scala Library: $title"
 tags: $tags
 category: $category
 ---
 
 $contents
 
+Full Source:
+___
 {% highlight scala %}
 $code
 {% endhighlight %}"""
-
   # url = "https://raw.githubusercontent.com/scala/scala/6d09a1ba5fffadd1d886afb66ab4496291fda3dd/src/library/scala/util/control/Breaks.scala"
   #        https://github.com/scala/scala/tree/6d09a1ba5f/src/library/scala/util/control/Breaks.scala#L1
   #        https://raw.githubusercontent.com/scala/scala/6d09a1ba5f/src/library/scala/util/control/Breaks.scala#L1
@@ -66,6 +67,10 @@ $code
   codematch = re.compile('```scala\n([^`]*)```\n')
   contents = re.sub(codematch, "{% highlight scala %}\n\\1{% endhighlight %}", contents)
 
+  githubmatch = re.compile(r'(\s+\*\s+)\[([^]]+)\]\(https:\/\/github\.com\/scala\/scala([^)]+)\)')
+  contents = re.sub(githubmatch, r'\1[\2 - Blame](https://github.com/scala/blame/\3)\1[\2 - History](https://github.com/scala/scala/commits/\3)', contents)
+ 
+  print(contents) 
   # replace duplicated things
 
   replaced = \
@@ -85,9 +90,9 @@ $code
   fout.close()
 
 import glob, os
-for file in glob.glob("_pre/*.md"):
+#for file in glob.glob("_pre/*.md"):
 #  try:
-  run(file)
+run(file)
 #  except:
 #    print "Unexpected error:", sys.exc_info()[0]
 
