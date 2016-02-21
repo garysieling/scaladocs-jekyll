@@ -40,9 +40,11 @@ category: $category
 $contents
 
 Full Source:
-___
+---
 {% highlight scala %}
+{% raw %}
 $code
+{% endraw %}
 {% endhighlight %}"""
   # url = "https://raw.githubusercontent.com/scala/scala/6d09a1ba5fffadd1d886afb66ab4496291fda3dd/src/library/scala/util/control/Breaks.scala"
   #        https://github.com/scala/scala/tree/6d09a1ba5f/src/library/scala/util/control/Breaks.scala#L1
@@ -55,8 +57,8 @@ $code
     url = "https://raw.githubusercontent.com" + str.replace(match.group(1), "/tree/", "/")
     code = requests.get(url).content
     
-    code = str.replace(code, "{", "&#123;")
-    code = str.replace(code, "}", "&#125;")
+    #code = str.replace(code, "{", "&#123;")
+    #code = str.replace(code, "}", "&#125;")
 
   endmatch = re.compile(r'\s+#{1,10}\n')
   contents = re.sub(endmatch, "\n", contents)
@@ -72,7 +74,7 @@ $code
  
   print(contents) 
   # replace duplicated things
-
+ 
   replaced = \
     str.replace(
       str.replace(
@@ -84,7 +86,6 @@ $code
         ), "$code", code,
       ), "$contents", contents)
 
-  print("writing " + file)
   fout = open("_posts/" + str.replace(file, "_pre/", ""), "w+")
   fout.write(replaced)
   fout.close()
