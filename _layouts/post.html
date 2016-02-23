@@ -5,11 +5,41 @@ layout: default
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">{{ page.author }}
+        </span></span>{% endif %}</p>
   </header>
+  
+  <div class="post-sidebar" id="tpl">
+     <div title="scala.annotation.Annotation"><div class="placeholder"></div><a class="tplshow" href="scala/annotation/Annotation.html" target="template">
+        <span class="class">
+          <img src="//www.scala-lang.org/api/2.11.7/lib/class.png" alt="Class" />
+        </span><span class="tplLink">Annotation</span>
+      </a>
+    </div>
+  </div>
 
   <div class="post-content" itemprop="articleBody">
     {{ content }}
   </div>
 
 </article>
+
+ 
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1570898-2']);
+  _gaq.push(['_gat._forceSSL']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
