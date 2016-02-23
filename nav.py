@@ -25,10 +25,10 @@ def report(data, tab):
 
   result = result + data
   if (tab % 2 == 1):
-    print "<h2 class='package'>" + data + "</h2>"
+    print "<h4 class='package'>" + data + "</h4>"
     return
   if (tab % 2 == 0):
-    print "<h3 class='package-member'>" + data + "</h2>"
+    print "<ol class='list-unstyled'><li class='package-member'>" + data + "</li></ol>"
     return
 
   print tab
