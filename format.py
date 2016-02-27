@@ -33,8 +33,9 @@ def run(file):
   template = """---
 layout: post
 title:  "Scala Library: $title"
-tags: $tags
-category: $category
+subtitle: "$subtitle"
+tags: "$tags"
+category: "$category"
 ---
 
 $contents
@@ -80,8 +81,11 @@ $code
       str.replace(
         str.replace(
           str.replace(
-            str.replace(template, "$title", title),
-            "$tags", tags,
+            str.replace(
+              str.replace(
+                template, "$subtitle", subtitle
+              ), "$title", title,
+            ), "$tags", tags,
           ), "$category", category,
         ), "$code", code,
       ), "$contents", contents)
@@ -91,9 +95,9 @@ $code
   fout.close()
 
 import glob, os
-#for file in glob.glob("_pre/*.md"):
-#  try:
-run(file)
-#  except:
-#    print "Unexpected error:", sys.exc_info()[0]
+for file in glob.glob("_pre/*.md"):
+  try:
+    run(file)
+  except:
+    print "Unexpected error:", sys.exc_info()[0]
 

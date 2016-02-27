@@ -2,10 +2,13 @@ from HTMLParser import HTMLParser
 
 tab = 0
 
-print "<h4 class='package'>Root Package</h4>"
+print "<h4 class='package'><a href='/scaladoc/scala/2016/02/15/scala.html'>Root Package</a></h4>"
 print "<ol class='list-unstyled'>"
 
+package = ''
+
 def report(data, tab):
+  global package
   if (data.strip() == ''):
     return
 
@@ -27,11 +30,26 @@ def report(data, tab):
     result = result + '  '
 
   result = result + data
+
   if (tab % 2 == 1):
-    print "</ol><h4 class='package'>" + data + "</h4><ol class='list-unstyled'>"
+    package = str.replace(data, "scala.", "")
+
+    filename = package 
+    filename = str.replace( str.replace(filename, "scala.", "scala__"), ".", "_" )
+
+    url = "/scaladoc/scala." + package + "/2016/02/15/scala_" + filename + ".html"
+
+    print "</ol><h4 class='package'><a href='" + url + "'>" + data + "</a></h4><ol class='list-unstyled'>"
     return
   if (tab % 2 == 0):
-    href = "/scaladoc/scala." + "util.control.breaks" + "/2016/02/15/scala__" + "util_control_Breaks_TryBlock" + ".html"
+    cls = data
+    if (package != ""):
+      filename = package + "." + cls
+    else:
+      filename = cls
+
+    filename = str.replace(filename, ".", "_" ) 
+    href = "/scaladoc/scala." + package + cls + "/2016/02/15/scala__" + filename + ".html"
     print "<li class='package-member'><a href='" + href + "'>" + data + "</a></li>"
     return
 
